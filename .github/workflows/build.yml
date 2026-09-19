@@ -19,22 +19,20 @@ jobs:
           distribution: 'zulu'
           java-version: '17'
 
-      - name: 🐦 تثبيت بيئة فلاتر
+      - name: 🐦 تثبيت بيئة فلاتر المستقرة
         uses: subosito/flutter-action@v2
         with:
+          flutter-version: '3.24.5'
           channel: 'stable'
 
-      - name: ⚡ إصلاح كود الأندرويد تلقائياً
+      - name: 🔥 إعادة بناء وتحديث مجلد الأندرويد جذرياً
         run: |
-          sed -i '/flutterEmbedding/d' android/app/src/main/AndroidManifest.xml || true
-          rm -rf android/app/src/main/kotlin/* || true
-          rm -rf android/app/src/main/java/* || true
-          mkdir -p android/app/src/main/kotlin/com/example/sakina
-          cat << 'EOF' > android/app/src/main/kotlin/com/example/sakina/MainActivity.kt
-          package com.example.sakina
-          import io.flutter.embedding.android.FlutterActivity
-          class MainActivity: FlutterActivity()
-          EOF
+          rm -rf android/
+          flutter create . --platforms=android --org=com.sakinah
+
+      - name: 🌐 إضافة أذونات الإنترنت التلقائية
+        run: |
+          sed -i '/<application/i \    <uses-permission android:name="android.permission.INTERNET"/>\n    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>' android/app/src/main/AndroidManifest.xml
 
       - name: 📦 تحميل المكتبات
         run: flutter pub get
@@ -42,7 +40,7 @@ jobs:
       - name: 🚀 بناء ملف الـ APK النهائي
         run: flutter build apk --release
 
-      - name: 📤 رفع واستخراج ملف التطبيق
+      - name: 📤 رفع واستخراج ملف التطبيق للتحميل
         uses: actions/upload-artifact@v4
         with:
           name: Sakinah-App-Release
