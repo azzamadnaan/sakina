@@ -1,0 +1,37 @@
+name: Build Sakinah APK
+
+on:
+  push:
+    branches: [ main, master ] # يتم البناء تلقائياً عند رفع أي تعديل
+  workflow_dispatch: # يتيح لك تشغيل البناء يدوياً بنقرة زر في أي وقت
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 جلب ملفات الكود
+        uses: actions/checkout@v4
+
+      - name: ☕ تثبيت بيئة الجافا
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'zulu'
+          java-version: '17'
+
+      - name: 🐦 تثبيت بيئة فلاتر
+        uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+
+      - name: 📦 تحميل المكتبات تلقائياً
+        run: flutter pub get
+
+      - name: 🚀 بناء ملف الـ APK النهائي لتطبيق سكينة
+        run: flutter build apk --release
+
+      - name: 📤 رفع واستخراج ملف التطبيق للتحميل
+        uses: actions/upload-artifact@v4
+        with:
+          name: Sakinah-App-Release
+          path: build/app/outputs/flutter-apk/app-release.apk
