@@ -1,7 +1,7 @@
 import 'package:google_generative_ai/google_generative_ai.dart';
 
 class GeminiService {
-  static const String _apiKey = 'ضع_مفتاح_API_الخاص_بك_هنا';
+  static const String _apiKey = 'AQ.Ab8RN6K1fhrZPyILkcUb8MDE3RSuGX9ZIl0HMX-IkW4xy_TJtg';
 
   static const String _systemInstruction = """
 أنت 'سكينة AI'، رفيق ومساعد ديني إسلامي رحيم، هادئ، ومتخصص.
