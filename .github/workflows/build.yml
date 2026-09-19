@@ -2,8 +2,8 @@ name: Build Sakinah APK
 
 on:
   push:
-    branches: [ main, master ] # يتم البناء تلقائياً عند رفع أي تعديل
-  workflow_dispatch: # يتيح لك تشغيل البناء يدوياً بنقرة زر في أي وقت
+    branches: [ main, master ]
+  workflow_dispatch:
 
 jobs:
   build:
@@ -19,10 +19,10 @@ jobs:
           distribution: 'zulu'
           java-version: '17'
 
-      - name: 🐦 تثبيت بيئة فلاتر
+      - name: 🐦 تثبيت بيئة فلاتر المتوافقة
         uses: subosito/flutter-action@v2
         with:
-          channel: 'stable'
+          flutter-version: '3.22.2'
 
       - name: 📦 تحميل المكتبات تلقائياً
         run: flutter pub get
