@@ -1,21 +1,44 @@
+name: sakina
+description: "تطبيق سكينة - رفيق المسلم اليومي"
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+
 dependencies:
   flutter:
     sdk: flutter
   flutter_localizations:
     sdk: flutter
 
-  # واجهات وتصميم
-  google_fonts: ^6.1.0 # لدعم خطي (Cairo أو Amiri)
-  
-  # الوسائط والصوتيات
+  # واجهات وتصميم وأيقونات
+  cupertino_icons: ^1.0.6
+  google_fonts: ^6.1.0
+
+  # وسائط وصوتيات وفيديو
   video_player: ^2.8.2
   just_audio: ^0.9.36
-  
-  # شبكات ومواقيت وذكاء اصطناعي
+
+  # شبكات والذكاء الاصطناعي
   dio: ^5.4.0
-  google_generative_ai: ^0.4.0 # محرك Gemini AI
-  
+  google_generative_ai: ^0.4.0
+
   # أدوات مساعدة ونظام
   shared_preferences: ^2.2.2
   intl: ^0.19.0
   share_plus: ^7.2.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.0
+
+flutter:
+  uses-material-design: true
+
+  # مسارات الوسائط (الصور والفيديو)
+  assets:
+    - assets/images/
+    - assets/videos/
